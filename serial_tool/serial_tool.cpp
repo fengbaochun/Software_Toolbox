@@ -50,7 +50,7 @@ serial_tool::serial_tool(QWidget *parent) :
 
     ui->hex_show_checkBox->setEnabled(true);//设置这个框是否可选
     ui->hex_show_checkBox->setCheckState(Qt::Unchecked);//设置checkbox 状态
-    ui->rev_sw_checkBox->setCheckState(Qt::Checked);
+//    ui->rev_sw_checkBox->setCheckState(Qt::Checked);
 
     qDebug()<<ui->hex_show_checkBox->checkState();//输出当前状态
     ui->hex_show_checkBox->isChecked();
