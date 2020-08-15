@@ -29,6 +29,12 @@ FORMS += \
     mainwindow.ui \
     serial_tool/serial_tool.ui
 
+# opencv 中的include文件夹
+INCLUDEPATH+=   D:\opencv3.4.1\opencv\build\include
+
+#opencv 编译后的文件夹中的lib文件夹
+LIBS += D:\opencv3.4.1\opencv\build\x64\vc15\lib\opencv_world341d.lib
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
