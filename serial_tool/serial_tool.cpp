@@ -22,6 +22,9 @@ serial_tool::serial_tool(QWidget *parent) :
     connect(ui->clearButton,&QPushButton::clicked,this,&serial_tool::but_manage);
     connect(ui->rev_clear_Button,&QPushButton::clicked,this,&serial_tool::but_manage);
 
+    connect(ui->chb_timer_send,&QCheckBox::clicked,this,&serial_tool::timed_callback);
+//    connect(ui->send_time,&QSpinBox::valueChanged(),this,&serial_tool::timed_callback);
+
 
     //波特率下拉列表设置
     QStringList baudList;
@@ -51,7 +54,6 @@ serial_tool::serial_tool(QWidget *parent) :
     ui->radio_rev_text->setChecked(true);
     ui->radio_send_text->setChecked(true);
 
-    /**********************************************************************/
     //获取当前下拉列表的内容
     QString current_dataBox=ui->dataBox->currentText();//获取当前combox的文本
     int dataBox_index=ui->dataBox->currentIndex();//获取当前combox的文本
@@ -59,8 +61,6 @@ serial_tool::serial_tool(QWidget *parent) :
     qDebug()<<dataBox_index;  //打印数据位下拉列表的索引
     qDebug()<<dataList[dataBox_index];  //打印数据位下拉列表的内容
     qDebug()<<current_dataBox;  //打印数据位下拉列表的内容
-
-    /**********************************************************************/
 
     ui->Rev_textBrowser->setText("Welcome to use Serial Assistant!!!");
 
@@ -177,7 +177,6 @@ void serial_tool::open_port()
        {
            serial.clear();
            serial.close();
-           //serial.deleteLater();
            ui->openButton->setText(tr(u8"打开串口"));
            qDebug()<< ui->comBox->currentText() <<u8"已关闭";
            update_data->stop();//停止定时器
@@ -246,6 +245,11 @@ void serial_tool::send_data()
 
     if(temp_str.length()&& serial.isOpen())
     {
+        if(ui->newline_qcheckBox->isChecked())
+        {
+            temp_str = temp_str + "\r\n";
+        }
+
         //hex 模式
         if(ui->radio_send_hex->isChecked())
         {
@@ -260,6 +264,35 @@ void serial_tool::send_data()
     }
 }
 
+
+//定时发送回调函数
+void serial_tool::timed_callback()
+{
+    //串口已被打开
+    if(serial.isOpen())
+    {
+        int time_val = ui->send_time->value();
+        if(ui->chb_timer_send->isChecked())
+        {
+            connect(timed_sending,&QTimer::timeout,this,&serial_tool::loop_send_callback);
+            timed_sending->start(time_val);
+        }
+        else
+        {
+            timed_sending->stop();
+        }
+    }
+
+    qDebug()<<ui->chb_timer_send->checkState();
+    qDebug()<<ui->send_time->value();
+}
+
+//定时发送回调函数
+void serial_tool::loop_send_callback()
+{
+    qDebug()<<ui->send_time->value();
+    send_data();
+}
 
 
 

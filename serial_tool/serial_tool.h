@@ -19,14 +19,16 @@ public:
     explicit serial_tool(QWidget *parent = nullptr);
     ~serial_tool();
 
-    void open_port();       //打开串口
-    void show_rev_data();   //显示接收数据
-    void clear_send_buf();  //清空发送区
-    QByteArray read_data();       //读取数据
-    void send_data();       //清空发送区
-    void clear_rev_buf();   //清空接收区
+    void open_port();           //打开串口
+    void show_rev_data();       //显示接收数据
+    void clear_send_buf();      //清空发送区
+    QByteArray read_data();     //读取数据
+    void send_data();           //清空发送区
+    void clear_rev_buf();       //清空接收区
     QString ByteArrayToHexString(QByteArray data);
     QByteArray HexStringToByteArray(QString HexString);
+    void timed_callback();
+    void loop_send_callback();
 
 private:
     Ui::serial_tool *ui;
@@ -36,9 +38,9 @@ private:
 
     int serial_num = 0;     //串口数量
     QTimer *update_data = new QTimer;    //定时器
+    QTimer *timed_sending = new QTimer;    //定时器
 
     void but_manage();      //按键管理
-
     void find_portinfo();
 };
 

@@ -256,7 +256,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="qcheckBox_newline">
+             <widget class="QCheckBox" name="newline_qcheckBox">
               <property name="text">
                <string>追加新行</string>
               </property>
@@ -274,7 +274,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="sb_timer_send">
+             <widget class="QSpinBox" name="send_time">
               <property name="minimumSize">
                <size>
                 <width>60</width>
