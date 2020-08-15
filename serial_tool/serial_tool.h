@@ -23,12 +23,15 @@ public:
     void show_rev_data();   //显示接收数据
     void clear_send_buf();  //清空发送区
     QByteArray read_data();       //读取数据
-    void send_data();  //清空发送区
+    void send_data();       //清空发送区
+    void clear_rev_buf();   //清空接收区
+    QString ByteArrayToHexString(QByteArray data);
+    QByteArray HexStringToByteArray(QString HexString);
 
 private:
     Ui::serial_tool *ui;
     const QObject *btn[9];    //按键对象缓存
-    QString temp_str;
+
     QSerialPort serial;     //串口对象
 
     int serial_num = 0;     //串口数量

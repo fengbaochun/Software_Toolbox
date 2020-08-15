@@ -148,38 +148,38 @@
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <layout class="QFormLayout" name="formLayout_2">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="hex_show_checkBox">
-            <property name="text">
-             <string>HEX</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="hex_show_checkBox_2">
-            <property name="text">
-             <string>ASCII</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_4">
+           <widget class="QCheckBox" name="stop_show_checkBox">
             <property name="text">
              <string>停止显示</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="rev_clear_Button">
             <property name="text">
              <string>清空</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="save_Button">
             <property name="text">
              <string>保存</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radio_rev_hex">
+            <property name="text">
+             <string>HEX模式</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="radio_rev_text">
+            <property name="text">
+             <string>文本模式</string>
             </property>
            </widget>
           </item>
@@ -227,14 +227,14 @@
             <item>
              <widget class="QRadioButton" name="radio_send_hex">
               <property name="text">
-               <string>HEX</string>
+               <string>HEX模式</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radio_send_ascii">
+             <widget class="QRadioButton" name="radio_send_text">
               <property name="text">
-               <string>ASCII</string>
+               <string>文本模式</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -316,9 +316,9 @@
      <property name="title">
       <string>接收区</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_11">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QTextBrowser" name="Rev_textBrowser"/>
+       <widget class="QTextEdit" name="Rev_textBrowser"/>
       </item>
      </layout>
     </widget>

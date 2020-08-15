@@ -1,5 +1,8 @@
 ﻿#include "serial_tool/serial_tool.h"
 #include "ui_serial_tool.h"
+#include <QtCore>
+#include <QAbstractItemView>
+#include  <QSplitter>
 
 serial_tool::serial_tool(QWidget *parent) :
     QWidget(parent),
@@ -11,18 +14,14 @@ serial_tool::serial_tool(QWidget *parent) :
     btn[0]=ui->openButton;
     btn[1]=ui->sendButton;
     btn[2]=ui->clearButton;
+    btn[3]=ui->rev_clear_Button;
 
     //连接信号槽
     connect(ui->openButton,&QPushButton::clicked,this,&serial_tool::but_manage);
     connect(ui->sendButton,&QPushButton::clicked,this,&serial_tool::but_manage);
     connect(ui->clearButton,&QPushButton::clicked,this,&serial_tool::but_manage);
+    connect(ui->rev_clear_Button,&QPushButton::clicked,this,&serial_tool::but_manage);
 
-    //链接信号槽
-//    for(int i=0;i<3;i++)
-//    {
-//        //连接信号槽
-//        connect(btn[i],SIGNAL(clicked()),this,SLOT(but_manage()));
-//    }
 
     //波特率下拉列表设置
     QStringList baudList;
@@ -48,14 +47,9 @@ serial_tool::serial_tool(QWidget *parent) :
     ui->dataBox->addItems(dataList);        // 添加列表到控件中
     ui->dataBox->setCurrentText(dataList[3]);//设置当前选项
 
-    ui->hex_show_checkBox->setEnabled(true);//设置这个框是否可选
-    ui->hex_show_checkBox->setCheckState(Qt::Unchecked);//设置checkbox 状态
-//    ui->rev_sw_checkBox->setCheckState(Qt::Checked);
-
-    qDebug()<<ui->hex_show_checkBox->checkState();//输出当前状态
-    ui->hex_show_checkBox->isChecked();
-
-    //ui->hex_show_checkBox->setCheckState(Qt::Unchecked);
+    //设置当前发送和接收的模式为文本模式
+    ui->radio_rev_text->setChecked(true);
+    ui->radio_send_text->setChecked(true);
 
     /**********************************************************************/
     //获取当前下拉列表的内容
@@ -68,7 +62,6 @@ serial_tool::serial_tool(QWidget *parent) :
 
     /**********************************************************************/
 
-    //ui->Rev_textBrowser->insertPlainText((tr("Welcome to use Serial Assistant!!!")));
     ui->Rev_textBrowser->setText("Welcome to use Serial Assistant!!!");
 
     find_portinfo();
@@ -100,8 +93,13 @@ void serial_tool::but_manage()
     {
         clear_send_buf();
     }
+    else if(btn[3] == optBtn)
+    {
+        clear_rev_buf();
+    }
 
 }
+//寻找串口设备
 void serial_tool::find_portinfo()
 {
     //查找可用的串口
@@ -122,7 +120,7 @@ void serial_tool::find_portinfo()
     qDebug() << u8"串口个数" << serial_num;
 }
 
-
+//打开串口
 void serial_tool::open_port()
 {
     //判断按键状态
@@ -194,6 +192,12 @@ void serial_tool::clear_send_buf()
     ui->Send_textEdit->clear();
     qDebug()<< u8"已清空";
 }
+//清空接收区
+void serial_tool::clear_rev_buf()
+{
+    ui->Rev_textBrowser->clear();
+    qDebug()<< u8"已清空";
+}
 
 //读取数据
 QByteArray serial_tool::read_data()
@@ -207,24 +211,94 @@ QByteArray serial_tool::read_data()
 //显示接收数据
 void serial_tool::show_rev_data()
 {
-    QByteArray buf=read_data();
-    if(!buf.isEmpty())//判断是否有数据
+    //是否接收开关
+    if(ui->stop_show_checkBox->isChecked() == false)
     {
-        ui->Rev_textBrowser->append(tr(buf));
+        QString str_temp;
+        QByteArray buf=read_data();
+
+        if(!buf.isEmpty())//判断是否有数据
+        {
+            //hex 显示
+            if(ui->radio_rev_hex->isChecked())
+            {
+                str_temp = ByteArrayToHexString(buf);
+            }
+            else//文本模式
+            {
+                str_temp = tr(buf);
+            }
+
+            //更新到控件中
+            ui->Rev_textBrowser->append(str_temp);
+        }
+        buf.clear();
     }
-    buf.clear();
 }
 
+//发送数据
 void serial_tool::send_data()
 {
+    QString temp_str;
     temp_str = ui->Send_textEdit->toPlainText();
+
     qDebug()<< u8"字符串长度："<<temp_str.length();
-    //长度>0 才发送数据
+
     if(temp_str.length()&& serial.isOpen())
     {
-        serial.write(temp_str.toUtf8());//发送数据
-        qDebug()<< temp_str.toUtf8() <<u8"已发送";
+        //hex 模式
+        if(ui->radio_send_hex->isChecked())
+        {
+            QByteArray data = HexStringToByteArray(temp_str);
+            qDebug()<<data;
+            serial.write(data);
+        }
+        else //文本模式
+        {
+            serial.write(temp_str.toUtf8());//发送数据
+        }
     }
 }
 
+
+
+
+QString serial_tool::ByteArrayToHexString(QByteArray data)
+{
+    QString ret(data.toHex().toUpper());
+    int len = ret.length()/2;
+    for(int i=1;i<=len;i++)
+    {
+        ret.insert(2*i+i-1," ");
+    }
+    return ret;
+}
+
+QByteArray serial_tool::HexStringToByteArray(QString HexString)
+{
+    bool ok;
+    QByteArray ret;
+    HexString = HexString.trimmed();
+    HexString = HexString.simplified();
+    QStringList sl = HexString.split(" ");
+
+    foreach (QString s, sl) {
+        if(!s.isEmpty())
+        {
+            char c = s.toInt(&ok,16)&0xFF;
+            if(ok){
+                ret.append(c);
+            }else{
+                ret.clear();
+                //ret = NULL;
+                qDebug()<<"非法的16进制字符："<<s;
+                return ret;
+
+               // QMessageBox::warning(0,tr("错误："),QString("非法的16进制字符: \"%1\"").arg(s));
+            }
+        }
+    }
+   // qDebug()<<ret;
+    return ret;
+}
 
