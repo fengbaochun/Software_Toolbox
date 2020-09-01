@@ -39,3 +39,6 @@ LIBS += D:\opencv3.4.1\opencv\build\x64\vc15\lib\opencv_world341d.lib
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    img.qrc
