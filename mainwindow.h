@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "serial_tool/serial_tool.h"
+#include "chart/chart.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,5 +23,6 @@ public slots:
 private:
     Ui::MainWindow *ui;
     serial_tool *ss_ui;
+    Chart *chart_ui;
 };
 #endif // MAINWINDOW_H

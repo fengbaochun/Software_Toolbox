@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += serialport
+QT       += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,15 +18,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chart/chart.cpp \
+    chart/qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp \
     serial_tool/serial_tool.cpp
 
 HEADERS += \
+    chart/chart.h \
+    chart/qcustomplot.h \
     mainwindow.h \
     serial_tool/serial_tool.h
 
 FORMS += \
+    chart/chart.ui \
     mainwindow.ui \
     serial_tool/serial_tool.ui
 
