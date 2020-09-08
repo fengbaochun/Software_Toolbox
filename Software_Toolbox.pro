@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     chart/chart.cpp \
     chart/qcustomplot.cpp \
+    chart/serial.cpp \
     main.cpp \
     mainwindow.cpp \
     serial_tool/serial_tool.cpp
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     chart/chart.h \
     chart/qcustomplot.h \
+    chart/serial.h \
     mainwindow.h \
     serial_tool/serial_tool.h
 

@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QDebug>
 #include "chart/qcustomplot.h"
+#include "chart/serial.h"
 
 namespace Ui {
 class Chart;
@@ -21,6 +22,11 @@ public:
     ~Chart();
     void initChart(QCustomPlot *ChartWidget); // 初始化图表
 
+private slots:
+    void readFromSerial(); // 读取来自串口类的数据
+    void handleSerialError(); // 处理串口错误
+    void onNewPortList(QStringList portName); // 用于响应SerialPortList信号，周期获取串口列表
+
 private:
     QCustomPlot *m_customPlot; // 图表实例指针
     QVector<int> m_vecPidLastData; // 存放5个通道的PID上一次结果值
@@ -30,8 +36,7 @@ private:
     QTime m_pauseTimer; // 暂停时间计时器
     int m_pauseTime; // 暂停时间
     QTime m_serialTime; // 串口打开后的计时器
-
-
+    Serial *m_serial; // 自定义串口类实例指针
 
     Ui::Chart *ui;
 };
