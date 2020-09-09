@@ -91,10 +91,13 @@ void Chart::initChart(QCustomPlot *ChartWidget)
 // 读取来自串口类的数据
 void Chart::readFromSerial()
 {
+    qDebug()<<u8"接收信号";
+
     QByteArray readBuf = m_serial->getReadBuf();
     qDebug()<<readBuf;
     // 清除读取数据缓冲区
     m_serial->clearReadBuf();
+
 }
 
 
@@ -126,7 +129,6 @@ void Chart::on_openSerialButton_clicked()
         // 打开串口
         if(m_serial->open(ui->portComboBox->currentText(), ui->baudComboBox->currentText().toInt()))
         {
-            qDebug()<<u8"PID助手 串口已打开";
             // 打开串口前清除图表，避免加载数据产生曲线和串口接受曲线混杂
             clearChart();
             // 清空本地各通道的数据(避免加载数据中本地保存通道数据和打开串口后接受通道数据混淆)

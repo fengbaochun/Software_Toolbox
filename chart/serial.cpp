@@ -118,18 +118,22 @@ void Serial::readData()
     // 将下位机发来数据存储在数据缓冲区
     QByteArray temp = m_serialPort->readAll();
     m_tempAll.append(temp);
-    //qDebug() <<"temp: " << temp;
+    qDebug() <<"temp: " << temp;
 
     // 由于Qt串口固有缺陷，每次只能接受一帧数据的一部分，所以协议添加帧尾，进而分离出完整的一帧数据
     if(!m_tempAll.isEmpty())
     {
-        if(m_tempAll.contains("\r\n"))
+//        if(m_tempAll.contains("\r\n"))
+        if(m_tempAll.contains("\n"))
         {
+            //组合字符
             m_readBuf = m_tempAll.split('\r').at(0) + "\r\n";
             m_tempAll.clear();
 
 //            if(m_readBuf.length()>LIMIT_LENGTH && m_readBuf.length()==m_readBuf.at(2)) // 判断帧长度
             {
+                qDebug() <<"rev data: " << m_readBuf;
+                //发射信号
                 emit readOneFrame();
             }
         }
