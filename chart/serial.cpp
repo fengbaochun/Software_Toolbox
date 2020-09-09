@@ -42,6 +42,7 @@ bool Serial::open(QString serialName, int baudRate)
     // 打开串口(以读写方式)
     if(m_serialPort->open(QIODevice::ReadWrite))
     {
+        qDebug()<<u8"PID助手 串口已打开";
         m_serialPort->setBaudRate(baudRate); // 设置波特率(默认为115200)
         m_serialPort->setDataBits(QSerialPort::Data8); // 设置数据位(数据位为8位)
         m_serialPort->setParity(QSerialPort::NoParity); // 设置校验位(无校验位)

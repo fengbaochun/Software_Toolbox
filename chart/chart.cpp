@@ -118,6 +118,96 @@ void Chart::onNewPortList(QStringList portName)
 }
 
 
+// 打开串口按钮-点击槽函数
+void Chart::on_openSerialButton_clicked()
+{
+    if(ui->openSerialButton->text() == tr(u8"打开串口"))
+    {
+        // 打开串口
+        if(m_serial->open(ui->portComboBox->currentText(), ui->baudComboBox->currentText().toInt()))
+        {
+            qDebug()<<u8"PID助手 串口已打开";
+            // 打开串口前清除图表，避免加载数据产生曲线和串口接受曲线混杂
+            clearChart();
+            // 清空本地各通道的数据(避免加载数据中本地保存通道数据和打开串口后接受通道数据混淆)
+            clearChannelData();
+            // 暂停时间清零
+            clearPauseTime();
+            // 启动串口计时器，以获得串口打开后的经过时间
+            startTimer();
+
+            // 关闭下拉列表使能
+            ui->portComboBox->setEnabled(false);
+            ui->baudComboBox->setEnabled(false);
+            // 使能暂停更新按钮
+            ui->pauseUpdateButton->setEnabled(true);
+            // 修改按钮名称
+            ui->openSerialButton->setText(tr(u8"关闭串口"));
+            // 修改串口提示标签的文本，且颜色修改为蓝色
+            ui->serialTipLabel->setText(tr(u8"串口已开启"));
+            ui->serialTipLabel->setStyleSheet("color:blue");
+        }
+    }
+    else
+    {
+        // 避免当暂停更新(会disconnect)后关闭串口，再打开串口不接受数据的情况
+        m_isPause = false;
+        emit ui->pauseUpdateButton->clicked();
+
+        // 关闭串口
+        m_serial->close();
+        // 重新开启下拉列表使能
+        ui->portComboBox->setEnabled(true);
+        ui->baudComboBox->setEnabled(true);
+        // 设置不使能暂停更新按钮
+        ui->pauseUpdateButton->setEnabled(false);
+        // 恢复按钮名称
+        ui->openSerialButton->setText(tr(u8"打开串口"));
+        // 恢复串口提示标签的文本及颜色
+        ui->serialTipLabel->setText(tr(u8"串口未开启"));
+        ui->serialTipLabel->setStyleSheet("color:red");
+    }
+}
+
+// 清除通道对应曲线
+void Chart::clearChannel(int channel)
+{
+    // 写入空的vector即可清除曲线
+    m_customPlot->graph(channel)->setData({}, {});
+}
+
+// 清除图表
+void Chart::clearChart()
+{
+    for(int i=0; i<CHANNEL_COUNT; i++)
+        m_customPlot->graph(i)->setData({}, {});
+}
+
+// 刷新图表
+void Chart::replotChart()
+{
+    m_customPlot->replot();
+}
+
+// 清空本地各通道的数据
+void Chart::clearChannelData()
+{
+    for(int i=0; i<CHANNEL_COUNT; i++)
+        m_mapChannel[0].clear();
+}
+
+// 清零暂停时间
+void Chart::clearPauseTime()
+{
+    m_pauseTime = 0;
+}
+
+// 启动串口计时器
+void Chart::startTimer()
+{
+    m_serialTime.start();
+}
+
 Chart::~Chart()
 {
     delete ui;
