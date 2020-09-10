@@ -91,12 +91,23 @@ void Chart::initChart(QCustomPlot *ChartWidget)
 // 读取来自串口类的数据
 void Chart::readFromSerial()
 {
+    //test
+    static int i=0;
+
     qDebug()<<u8"接收信号";
 
     QByteArray readBuf = m_serial->getReadBuf();
     qDebug()<<readBuf;
     // 清除读取数据缓冲区
     m_serial->clearReadBuf();
+
+    // 初始化成员变量
+    m_vecPidData.resize(5); // 存放5个通道的PID结果值
+
+    //数据填充测试
+    m_vecPidData[0] = 10*(i++);
+
+    updataChart(1, m_vecPidData);
 
 }
 
@@ -169,6 +180,45 @@ void Chart::on_openSerialButton_clicked()
         ui->serialTipLabel->setText(tr(u8"串口未开启"));
         ui->serialTipLabel->setStyleSheet("color:red");
     }
+}
+
+// 更新图表
+void Chart::updataChart(char channel, QVector<int> vecPidData)
+{
+
+    // 自串口打开以来经过的时间-暂停时间，即x轴的时间值，以s为单位
+    double XAxisTime = (m_serialTime.elapsed() - this->m_pauseTime)/1000.0;
+
+    // 关闭通道后停止向graph里面添加数据
+    if((channel&0x01) == 0x01)
+    {
+        if(m_vecPidLastData[0] != vecPidData[0]) //值改变才添加数据到graph中
+        {
+            // 将数据添加到曲线
+            m_customPlot->graph(0)->addData(XAxisTime, vecPidData[0]);
+            // 添加到本地数据vector，方便保存和重新加载
+            m_mapChannel[0].insert(XAxisTime, vecPidData[0]);
+            // 获得上一次的数据(曲线不光滑的原因是好几次的Y值都一样，导致横线[时间过长]过长)
+            m_vecPidLastData[0] = vecPidData[0];
+        }
+    }
+    /*
+        可支持多组数据保存
+        暂时删掉
+    */
+
+    // 自适应设置X和Y轴的范围
+    if(!m_ismoving)
+    {
+        // 自定义x轴值的显示范围(起始值为elapsedTime，终止值为TIMER_COUNT)
+        m_customPlot->xAxis->setRange(XAxisTime, 8, Qt::AlignRight);
+
+        for(int i=0; i<CHANNEL_COUNT; i++)
+            m_customPlot->graph(i)->rescaleValueAxis(true);
+    }
+
+    // 立即刷新图像
+    m_customPlot->replot();
 }
 
 // 清除通道对应曲线

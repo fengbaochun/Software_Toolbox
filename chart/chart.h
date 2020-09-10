@@ -29,6 +29,8 @@ public:
     void startTimer();// 启动串口计时器
     void clearChannelData(); // 清空本地各通道的数据
 
+    void updataChart(char channel, QVector<int> vecPidData);//更新图标
+
 
 private slots:
 
@@ -54,6 +56,8 @@ private:
 
     Ui::Chart *ui;
     bool m_isPause = true; // 是否暂停更新的标志位
+
+    QVector<int> m_vecPidData; // 存放5个通道的PID结果值
 };
 
 #endif // CHART_H
