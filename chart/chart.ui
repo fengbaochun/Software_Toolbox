@@ -6,15 +6,226 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1108</width>
-    <height>670</height>
+    <width>1118</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="6" column="0">
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="0" rowspan="2" colspan="6">
+    <widget class="QCustomPlot" name="chartWidget" native="true">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6">
+    <widget class="QFrame" name="frame">
+     <property name="minimumSize">
+      <size>
+       <width>201</width>
+       <height>221</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>201</width>
+       <height>221</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>目标值:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QTextBrowser" name="target_val_Text">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	/* 边框1px宽，颜色为深紫色 */
+    border: 1px solid rgb(41, 57, 85);
+	/* 给定3px边框圆角 */
+    border-radius: 3px;
+	/* 背景色定为白色吧 */
+    background: white;
+	/* 文本的大小 */
+    font-size: 14px ;
+}
+ 
+QLineEdit:hover {
+	/* 鼠标悬停时，我们将编辑框的边框设置为蓝色 */
+    border: 1px solid blue; 
+}</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>实际值:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QTextBrowser" name="fact_val_Text"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>比例 P:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="pLineEdit"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>积分 I:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="iLineEdit"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>微分 D:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QDoubleSpinBox" name="dLineEdit"/>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>允许误差:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QSpinBox" name="allowable_error_QSpinBox"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>电机死区:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QSpinBox" name="dead_zone_spinBox"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>I分离阈值:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QSpinBox" name="I_Separate_spinBox"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="6">
+    <widget class="QFrame" name="frame_2">
+     <property name="minimumSize">
+      <size>
+       <width>201</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>201</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="readPidButton">
+        <property name="text">
+         <string>读取PID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="writePidButton">
+        <property name="text">
+         <string>写入PID</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QLabel" name="serialTipLabel">
      <property name="font">
       <font>
@@ -30,567 +241,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="6" colspan="2">
-    <widget class="QLabel" name="companyLabel">
-     <property name="font">
-      <font>
-       <family>宋体</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 102, 204);</string>
-     </property>
-     <property name="text">
-      <string>智澜科技</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="7" colspan="2">
-    <widget class="QFrame" name="ch1Frame">
-     <property name="minimumSize">
-      <size>
-       <width>180</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>180</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgba(255, 0, 0, 70);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="ch1Label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>32</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="ch1LcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>0</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>4</number>
-      </property>
-      <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-      </property>
-      <property name="intValue" stdset="0">
-       <number>0</number>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="6" column="4">
-    <layout class="QGridLayout" name="gridLayout_7">
-     <item row="0" column="0">
-      <widget class="QLabel" name="xLabel">
-       <property name="font">
-        <font>
-         <family>宋体</family>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>X: 0.00</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="yLabel">
-       <property name="font">
-        <font>
-         <family>宋体</family>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Y: 0.00</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="3">
-    <widget class="QPushButton" name="pauseUpdateButton">
-     <property name="styleSheet">
-      <string notr="true">/*按钮普通态*/
-QPushButton
-{
-    /*背景颜色*/  
-    background-color:rgb(255 , 255 , 255);
-    /*边框圆角半径为8像素*/ 
-    border-radius:8px;
-}</string>
-     </property>
-     <property name="text">
-      <string>暂停更新</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="5">
-    <widget class="QPushButton" name="windowTopButton">
-     <property name="styleSheet">
-      <string notr="true">/*按钮普通态*/
-QPushButton
-{
-    /*背景颜色*/  
-    background-color:rgb(255 , 255 , 255);
-    /*边框圆角半径为8像素*/ 
-    border-radius:8px;
-}</string>
-     </property>
-     <property name="text">
-      <string>窗口置顶</string>
-     </property>
-     <property name="shortcut">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="7" colspan="2">
-    <widget class="QFrame" name="ch2Frame">
-     <property name="minimumSize">
-      <size>
-       <width>180</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>180</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgba(255, 0, 255, 70);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="ch2Label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>32</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="ch2LcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>0</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>4</number>
-      </property>
-      <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-      </property>
-      <property name="intValue" stdset="0">
-       <number>0</number>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="3" column="7" colspan="2">
-    <widget class="QFrame" name="ch4Frame">
-     <property name="minimumSize">
-      <size>
-       <width>180</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>180</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgba(0, 0, 255, 70);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="ch4Label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>32</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="ch4LcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>0</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>4</number>
-      </property>
-      <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-      </property>
-      <property name="intValue" stdset="0">
-       <number>0</number>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="6" column="8">
-    <widget class="QLabel" name="taobaoLabel">
-     <property name="font">
-      <font>
-       <family>宋体</family>
-       <pointsize>12</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 102, 204);</string>
-     </property>
-     <property name="text">
-      <string>官方淘宝商铺</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="7" colspan="2">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="maximumSize">
-          <size>
-           <width>105</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>比例（P）：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="pLineEdit">
-         <property name="maximumSize">
-          <size>
-           <width>48</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	/* 边框1px宽，颜色为深紫色 */
-    border: 1px solid rgb(41, 57, 85);
-	/* 给定3px边框圆角 */
-    border-radius: 3px;
-	/* 背景色定为白色吧 */
-    background: white;
-	/* 文本的大小 */
-    font-size: 14px ;
-}
- 
-QLineEdit:hover {
-	/* 鼠标悬停时，我们将编辑框的边框设置为蓝色 */
-    border: 1px solid blue; 
-}</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="maximumSize">
-          <size>
-           <width>105</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>积分（I）：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="iLineEdit">
-         <property name="maximumSize">
-          <size>
-           <width>48</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	/* 边框1px宽，颜色为深紫色 */
-    border: 1px solid rgb(41, 57, 85);
-	/* 给定3px边框圆角 */
-    border-radius: 3px;
-	/* 背景色定为白色吧 */
-    background: white;
-	/* 文本的大小 */
-    font-size: 14px ;
-}
- 
-QLineEdit:hover {
-	/* 鼠标悬停时，我们将编辑框的边框设置为蓝色 */
-    border: 1px solid blue; 
-}</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="dLineEdit">
-         <property name="maximumSize">
-          <size>
-           <width>48</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-	/* 边框1px宽，颜色为深紫色 */
-    border: 1px solid rgb(41, 57, 85);
-	/* 给定3px边框圆角 */
-    border-radius: 3px;
-	/* 背景色定为白色吧 */
-    background: white;
-	/* 文本的大小 */
-    font-size: 14px ;
-}
- 
-QLineEdit:hover {
-	/* 鼠标悬停时，我们将编辑框的边框设置为蓝色 */
-    border: 1px solid blue; 
-}</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="maximumSize">
-          <size>
-           <width>105</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>宋体</family>
-           <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>微分（D）：</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="readPidButton">
-         <property name="text">
-          <string>读取PID</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="writePidButton">
-         <property name="text">
-          <string>写入PID</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="resButton">
-         <property name="text">
-          <string>恢复出厂</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="setButton">
-         <property name="text">
-          <string>设置出厂</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="1">
+   <item row="2" column="1">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
       <widget class="QComboBox" name="baudComboBox">
@@ -716,7 +367,7 @@ QComboBox::down-arrow {
      </item>
     </layout>
    </item>
-   <item row="6" column="2">
+   <item row="2" column="2">
     <widget class="QPushButton" name="openSerialButton">
      <property name="styleSheet">
       <string notr="true">/*按钮普通态*/
@@ -751,181 +402,75 @@ QPushButton:pressed
      </property>
     </widget>
    </item>
-   <item row="0" column="0" rowspan="6" colspan="7">
-    <widget class="QCustomPlot" name="chartWidget" native="true">
+   <item row="2" column="3">
+    <widget class="QPushButton" name="pauseUpdateButton">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">/*按钮普通态*/
+QPushButton
+{
+    /*背景颜色*/  
+    background-color:rgb(255 , 255 , 255);
+    /*边框圆角半径为8像素*/ 
+    border-radius:8px;
+}</string>
+     </property>
+     <property name="text">
+      <string>暂停更新</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="7" colspan="2">
-    <widget class="QFrame" name="ch3Frame">
-     <property name="minimumSize">
-      <size>
-       <width>180</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>180</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgba(0, 128, 0, 70);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <widget class="QLabel" name="ch3Label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>32</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="ch3LcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>0</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>4</number>
-      </property>
-      <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-      </property>
-      <property name="intValue" stdset="0">
-       <number>0</number>
-      </property>
-     </widget>
-    </widget>
+   <item row="2" column="4">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <widget class="QLabel" name="xLabel">
+       <property name="font">
+        <font>
+         <family>宋体</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>X: 0.00</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="yLabel">
+       <property name="font">
+        <font>
+         <family>宋体</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Y: 0.00</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="4" column="7" colspan="2">
-    <widget class="QFrame" name="ch5Frame">
-     <property name="minimumSize">
-      <size>
-       <width>180</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>180</width>
-       <height>80</height>
-      </size>
-     </property>
+   <item row="2" column="5">
+    <widget class="QPushButton" name="windowTopButton">
      <property name="styleSheet">
-      <string notr="true">color: rgba(0, 255, 255, 70);</string>
+      <string notr="true">/*按钮普通态*/
+QPushButton
+{
+    /*背景颜色*/  
+    background-color:rgb(255 , 255 , 255);
+    /*边框圆角半径为8像素*/ 
+    border-radius:8px;
+}</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+     <property name="text">
+      <string>窗口置顶</string>
      </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+     <property name="shortcut">
+      <string/>
      </property>
-     <widget class="QLabel" name="ch5Label">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>32</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="ch5LcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>0</y>
-        <width>111</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="lineWidth">
-       <number>0</number>
-      </property>
-      <property name="smallDecimalPoint">
-       <bool>false</bool>
-      </property>
-      <property name="digitCount">
-       <number>4</number>
-      </property>
-      <property name="value" stdset="0">
-       <double>0.000000000000000</double>
-      </property>
-      <property name="intValue" stdset="0">
-       <number>0</number>
-      </property>
-     </widget>
     </widget>
    </item>
   </layout>

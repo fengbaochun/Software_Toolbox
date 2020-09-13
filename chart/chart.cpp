@@ -104,11 +104,14 @@ void Chart::readFromSerial()
     // 初始化成员变量
     m_vecPidData.resize(5); // 存放5个通道的PID结果值
 
-    //数据填充测试
-    m_vecPidData[0] = 10*(i++);
+    // 更新图表数据
+    for(int i=0; i<CHANNEL_COUNT; i++)
+//        m_vecPidData[i] = 100*(i+1);//test
+        m_vecPidData[i] = 100*(5);//test
 
-    updataChart(1, m_vecPidData);
 
+    for(int i = 0;i < CHANNEL_COUNT;i++)
+        updataChart(i, m_vecPidData);
 }
 
 
@@ -190,9 +193,9 @@ void Chart::updataChart(char channel, QVector<int> vecPidData)
     double XAxisTime = (m_serialTime.elapsed() - this->m_pauseTime)/1000.0;
 
     // 关闭通道后停止向graph里面添加数据
-    if((channel&0x01) == 0x01)
+    if(channel == 0)
     {
-        if(m_vecPidLastData[0] != vecPidData[0]) //值改变才添加数据到graph中
+//        if(m_vecPidLastData[0] != vecPidData[0]) //值改变才添加数据到graph中
         {
             // 将数据添加到曲线
             m_customPlot->graph(0)->addData(XAxisTime, vecPidData[0]);
@@ -200,6 +203,42 @@ void Chart::updataChart(char channel, QVector<int> vecPidData)
             m_mapChannel[0].insert(XAxisTime, vecPidData[0]);
             // 获得上一次的数据(曲线不光滑的原因是好几次的Y值都一样，导致横线[时间过长]过长)
             m_vecPidLastData[0] = vecPidData[0];
+        }
+    }
+    if(channel == 1)
+    {
+//        if(m_vecPidLastData[1] != vecPidData[1])
+        {
+            m_customPlot->graph(1)->addData(XAxisTime, vecPidData[1]);
+            m_mapChannel[1].insert(XAxisTime, vecPidData[1]);
+            m_vecPidLastData[1] = vecPidData[1];
+        }
+    }
+    if(channel == 2)
+    {
+//        if(m_vecPidLastData[2] != vecPidData[2])
+        {
+            m_customPlot->graph(2)->addData(XAxisTime, vecPidData[2]);
+            m_mapChannel[2].insert(XAxisTime, vecPidData[2]);
+            m_vecPidLastData[2] = vecPidData[2];
+        }
+    }
+    if(channel == 3)
+    {
+//        if(m_vecPidLastData[3] != vecPidData[3])
+        {
+            m_customPlot->graph(3)->addData(XAxisTime, vecPidData[3]);
+            m_mapChannel[3].insert(XAxisTime, vecPidData[3]);
+            m_vecPidLastData[3] = vecPidData[3];
+        }
+    }
+    if(channel == 4)
+    {
+//        if(m_vecPidLastData[4] != vecPidData[4])
+        {
+            m_customPlot->graph(4)->addData(XAxisTime, vecPidData[4]);
+            m_mapChannel[4].insert(XAxisTime, vecPidData[4]);
+            m_vecPidLastData[4] = vecPidData[4];
         }
     }
     /*
