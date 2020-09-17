@@ -208,14 +208,17 @@ QLineEdit:hover {
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
+      <item row="0" column="0" colspan="2">
+       <widget class="QDial" name="dial"/>
+      </item>
+      <item row="1" column="0">
        <widget class="QPushButton" name="readPidButton">
         <property name="text">
          <string>读取PID</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="1" column="1">
        <widget class="QPushButton" name="writePidButton">
         <property name="text">
          <string>写入PID</string>
