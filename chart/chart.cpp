@@ -16,6 +16,21 @@ Chart::Chart(QWidget *parent) :
     // 初始化图表
     initChart(ui->chartWidget);
 
+    //设置刻度可见
+    ui->dial->setNotchesVisible(true);
+    //设置范围
+    ui->dial->setRange(0,1024);
+    //设置小刻度
+    ui->dial->setNotchTarget(4);
+    //设置大刻度
+    ui->dial->setPageStep(1024/4);
+    //设置当前值
+    ui->dial->setValue(1024/2);
+    //设置空间下放是否留白
+    ui->dial->setWrapping(false);
+    //槽函数回调
+    connect(ui->dial,&QDial::valueChanged, this, &Chart::get_target_val);
+
     // 初始化串口
     m_serial = new Serial;
     // 寻找可用串口
@@ -33,6 +48,15 @@ Chart::Chart(QWidget *parent) :
     connect(m_serial, SIGNAL(errorSignal()), this, SLOT(handleSerialError()));
     // 连接onNewSerialPort信号槽，定时获取串口列表
     connect(m_serial, SIGNAL(onNewSerialPort(QStringList)),this, SLOT(onNewPortList(QStringList)));
+}
+
+//新的目标值
+void Chart::get_target_val()
+{
+    int value = 0;
+    value = ui->dial->value();
+    qDebug()<<"cur_tar_val : "<<value<<"\r\n";
+
 }
 
 void Chart::initChart(QCustomPlot *ChartWidget)

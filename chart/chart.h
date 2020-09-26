@@ -32,6 +32,7 @@ public:
     void updataChart(char channel, QVector<int> vecPidData);//更新图标
 
 
+
 private slots:
 
     void readFromSerial(); // 读取来自串口类的数据
@@ -42,6 +43,8 @@ private slots:
 
 //    void on_readPidButton_clicked(); // 读取PID按钮-点击槽函数
 //    void on_writePidButton_clicked(); // 写入PID按钮-点击槽函数
+
+    void get_target_val();//获取新的目标值
 
 private:
     QCustomPlot *m_customPlot; // 图表实例指针
